@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio BTS SIO - BINTOUL Giovanni</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Bouton CV UNIQUEMENT Télécharger -->
+    <div class="cv-button" onclick="downloadCV()">
+        <i class="fas fa-download"></i>
+        <span>Télécharger CV</span>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <i class="fas fa-cookie-bite"></i>
+            <span>Nous utilisons des cookies pour améliorer votre expérience.</span>
+            <div class="cookie-buttons">
+                <button id="accept-cookies" class="btn-accept">Accepter</button>
+                <button id="refuse-cookies" class="btn-refuse">Refuser</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div id="chatbot-container" class="chatbot-container">
+        <div class="chatbot-toggle" id="chatbot-toggle">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <span>Assistant Portfolio</span>
+                <button class="chatbot-close" id="chatbot-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        Bonjour ! Je suis l'assistant de Giovanni BINTOUL (BTS SIO SLAM). 
+                        Demandez-moi "projets", "compétences", "cv" ou "contact" ! 😊
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <input type="text" id="chatbot-input" placeholder="Tapez votre question..." maxlength="500">
+                <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">Portfolio</h1>
+                <ul class="nav-menu">
+                    <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="#projets"><i class="fas fa-project-diagram"></i> Projets</a></li>
+                    <li><a href="#competences"><i class="fas fa-cogs"></i> Compétences</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title animate">BINTOUL Giovanni</h2>
+            <p class="hero-subtitle animate-delay">Étudiant <span class="highlight">BTS SIO SLAM</span><br>2024-2026 • Lycée Melkior-Garré</p>
+            <div class="hero-stats animate-delay2">
+                <div class="stat"><span>2</span><br>Projets BTS</div>
+                <div class="stat"><span>95%</span><br>Compétences Tech</div>
+            </div>
+            <a href="#projets" class="cta-button animate-delay3">
+                <i class="fas fa-rocket"></i> Découvrir mes projets
+            </a>
+        </div>
+        <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+    </section>
+
+    <section id="projets" class="projects">
+        <h2 class="section-title"><i class="fas fa-code"></i> Mes Projets BTS SIO</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image"><i class="fas fa-database"></i></div>
+                <div class="project-content">
+                    <h3>Projet 1ère Année</h3>
+                    <p>Application de gestion complète développée en PHP/MySQL pour le BTS SIO.</p>
+                    <ul class="project-tech">
+                        <li>PHP</li><li>MySQL</li><li>HTML/CSS</li><li>JavaScript</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://github.com/senvi27" target="_blank"><i class="fab fa-github"></i> Code</a>
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Démo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image"><i class="fas fa-shopping-cart"></i></div>
+                <div class="project-content">
+                    <h3>Projet 2ème Année</h3>
+                    <p>Plateforme web moderne avec technologies JavaScript avancées.</p>
+                    <ul class="project-tech">
+                        <li>JavaScript</li><li>React</li><li>Node.js</li><li>MongoDB</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://github.com/senvi27" target="_blank"><i class="fab fa-github"></i> Code</a>
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Démo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="competences" class="skills">
+        <h2 class="section-title"><i class="fas fa-tools"></i> Compétences BTS SIO</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <div class="skill-bars">
+                    <div class="skill-item"><span>HTML5/CSS3</span><div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div></div>
+                    <div class="skill-item"><span>JavaScript</span><div class="skill-bar"><div class="skill-fill" data-width="87%"></div></div></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Backend</h3>
+                <div class="skill-bars">
+                    <div class="skill-item"><span>PHP 8</span><div class="skill-bar"><div class="skill-fill" data-width="82%"></div></div></div>
+                    <div class="skill-item"><span>MySQL</span><div class="skill-bar"><div class="skill-fill" data-width="88%"></div></div></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Outils</h3>
+                <div class="skill-bars">
+                    <div class="skill-item"><span>Git/GitHub</span><div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div></div>
+                    <div class="skill-item"><span>Docker</span><div class="skill-bar"><div class="skill-fill" data-width="78%"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title"><i class="fas fa-paper-plane"></i> Contact</h2>
+        <div class="contact-links">
+            <a href="mailto:giovannibintoul46@gmail.com" class="contact-btn mail"><i class="fas fa-envelope"></i> Email</a>
+            <a href="https://github.com/senvi27" target="_blank" class="contact-btn github"><i class="fab fa-github"></i> senvi27</a>
+            <a href="https://wa.me/594694493899" target="_blank" class="contact-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://www.instagram.com/p1nk2s" target="_blank" class="contact-btn insta"><i class="fab fa-instagram"></i> @p1nk2s</a>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
