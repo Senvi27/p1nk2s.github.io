@@ -1,155 +1,204 @@
-// ===== CV DOWNLOAD PDF CORRIGÉ =====
+// ===== CV DOWNLOAD FIXÉ =====
 function downloadCV() {
-    const link = document.createElement('a');
-    link.href = 'CV.pdf';
-    link.download = 'CV_Giovanni_Bintoul_BTS_SIO.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    window.open('CV.pdf', '_blank');
 }
 
-// ===== CHATBOT INTELLIGENT =====
-const chatbotToggle = document.getElementById('chatbot-toggle');
-const chatbotWindow = document.getElementById('chatbot-window');
-const chatbotClose = document.getElementById('chatbot-close');
-const chatbotSend = document.getElementById('chatbot-send');
-const chatbotInput = document.getElementById('chatbot-input');
-const chatbotMessages = document.getElementById('chatbot-messages');
-
-let isTyping = false;
-
-const responses = {
-    'bonjour': 'Bonjour ! Bienvenue sur le portfolio de Giovanni BINTOUL, étudiant BTS SIO SLAM (Lycée Melkior-Garré). Comment puis-je vous aider ? 😊',
-    'projet': '2 projets BTS SIO : Projet 1ère année (PHP/MySQL) + Projet 2ème année (JavaScript/React/Node.js). Faites défiler vers "Projets" 👇',
-    'compétences': 'Compétences : HTML/CSS/JS (92%), PHP 8 (82%), MySQL (88%), Git/GitHub (95%), Docker (78%). Section "Compétences" ci-dessous !',
-    'cv': '📄 Cliquez "Télécharger CV" (bouton en haut à droite) pour obtenir le CV PDF de Giovanni BINTOUL (BTS SIO SLAM) !',
-    'contact': '📞 giovannibintoul46@gmail.com | GitHub: senvi27 | WhatsApp: +594 06 94 49 38 99 | Instagram: @p1nk2s',
-    'bts': 'BTS SIO SLAM 2024-2026 au Lycée Melkior-Garré (Cayenne). Spécialité Solutions Logicielles et Applications Métiers.',
-    'stage': 'Stage informatique Collège Auguste Déde (juin-juillet 2025) + Stage Securidom (janvier-février 2024). Détails dans le CV !',
-    'default': 'Dites-moi "projets", "compétences", "cv", "contact", "bts" ou "stage" pour des infos précises ! 🚀'
-};
-
-function getBotResponse(message) {
-    const msg = message.toLowerCase();
-    for (let key in responses) {
-        if (msg.includes(key)) return responses[key];
-    }
-    return responses['default'];
-}
-
-function sendMessage() {
-    const message = chatbotInput.value.trim();
-    if (!message || isTyping) return;
-
-    addMessage('user', message);
-    chatbotInput.value = '';
-
-    isTyping = true;
-    const typingMsg = addMessage('bot', '⏳ Réponse en cours...');
-    
-    setTimeout(() => {
-        typingMsg.remove();
-        const response = getBotResponse(message);
-        addMessage('bot', response);
-        isTyping = false;
-    }, 1200);
-}
-
-function addMessage(sender, content) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${sender}-message`;
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'message-content';
-    contentDiv.textContent = content;
-    messageDiv.appendChild(contentDiv);
-    chatbotMessages.appendChild(messageDiv);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    return messageDiv;
-}
-
-chatbotToggle.addEventListener('click', () => chatbotWindow.classList.toggle('open'));
-chatbotClose.addEventListener('click', () => chatbotWindow.classList.remove('open'));
-chatbotSend.addEventListener('click', sendMessage);
-chatbotInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
-
-// ===== COOKIES =====
-const cookieBanner = document.getElementById('cookie-banner');
-const acceptCookies = document.getElementById('accept-cookies');
-const refuseCookies = document.getElementById('refuse-cookies');
-
-function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-}
-
-function getCookie(name) {
-    const nameEQ = name + "=";
-    return document.cookie.split(';').find(row => row.startsWith(nameEQ))?.split('=')[1];
-}
-
-if (!getCookie('cookies_accepted')) {
-    setTimeout(() => cookieBanner.classList.add('active'), 2500);
-}
-
-acceptCookies.addEventListener('click', () => {
-    setCookie('cookies_accepted', 'true', 365);
-    cookieBanner.style.display = 'none';
-});
-refuseCookies.addEventListener('click', () => {
-    setCookie('cookies_accepted', 'false', 30);
-    cookieBanner.style.display = 'none';
-});
-
-// ===== NAVIGATION + ANIMATIONS =====
+// ===== NAV MOBILE =====
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
-hamburger.addEventListener('click', () => {
+hamburger?.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
 });
 
-window.addEventListener('load', () => {
-    document.querySelector('.hero-title').classList.add('fade-in');
-    document.querySelector('.hero-subtitle').classList.add('fade-in', 'animate-delay');
-    document.querySelector('.hero-stats').classList.add('fade-in', 'animate-delay2');
-    document.querySelector('.cta-button').classList.add('fade-in', 'animate-delay3');
-});
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('fade-in');
-    });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-document.querySelectorAll('.project-card, .skill-category').forEach(el => observer.observe(el));
-
-const skillFills = document.querySelectorAll('.skill-fill');
-const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.style.width = entry.target.dataset.width;
-    });
-}, { threshold: 0.5 });
-
-skillFills.forEach(fill => skillObserver.observe(fill));
-
+// ===== ANIMATIONS SCROLL + SKILLS =====
 window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255,255,255,1)';
-        navbar.style.boxShadow = '0 5px 25px rgba(0,0,0,0.1)';
-    } else {
-        navbar.style.background = 'rgba(255,255,255,0.95)';
-        navbar.style.boxShadow = 'none';
-    }
+    document.querySelectorAll('.animate, .animate-delay, .animate-delay2, .animate-delay3').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+            el.classList.add('fade-in');
+        }
+    });
+    
+    document.querySelectorAll('.project-card').forEach((el, i) => {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+            el.style.transitionDelay = `${i * 0.1}s`;
+        }
+    });
 });
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+// ===== CHATBOT IA AVANCÉE =====
+class AdvancedChatbot {
+    constructor() {
+        this.apiKey = 'YOUR_OPENAI_API_KEY'; // À remplacer
+        this.conversationHistory = [];
+        this.isTyping = false;
+        
+        this.init();
+    }
+
+    init() {
+        this.chatbotToggle = document.getElementById('chatbot-toggle');
+        this.chatbotWindow = document.getElementById('chatbot-window');
+        this.chatbotClose = document.getElementById('chatbot-close');
+        this.chatbotSend = document.getElementById('chatbot-send');
+        this.chatbotInput = document.getElementById('chatbot-input');
+        this.chatbotMessages = document.getElementById('chatbot-messages');
+
+        this.chatbotToggle.addEventListener('click', () => this.toggleChat());
+        this.chatbotClose.addEventListener('click', () => this.closeChat());
+        this.chatbotSend.addEventListener('click', () => this.sendMessage());
+        this.chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.sendMessage();
+        });
+
+        // Quick buttons
+        this.quickButtons = [
+            { text: '💻 Projets BTS', intent: 'projets' },
+            { text: '⭐ Compétences', intent: 'competences' },
+            { text: '📄 CV', intent: 'cv' },
+            { text: '📞 Contact', intent: 'contact' },
+            { text: '🎓 Parcours', intent: 'parcours' },
+            { text: '🚀 IA Avancée', intent: 'ia' }
+        ];
+        this.renderQuickButtons();
+    }
+
+    toggleChat() {
+        this.chatbotWindow.classList.toggle('open');
+        if (this.chatbotWindow.classList.contains('open')) {
+            this.addMessage('bot', 'Bonjour ! Je suis Grok, l\'IA du portfolio de Giovanni BINTOUL (BTS SIO SLAM). Posez-moi n\'importe quelle question technique ! 🚀');
+        }
+    }
+
+    closeChat() {
+        this.chatbotWindow.classList.remove('open');
+    }
+
+    renderQuickButtons() {
+        const buttonsHtml = this.quickButtons.map(btn => 
+            `<button class="quick-btn" onclick="chatbot.handleQuick('${btn.intent}')">${btn.text}</button>`
+        ).join('');
+        this.addMessage('bot', buttonsHtml, false);
+    }
+
+    handleQuick(intent) {
+        const quickResponses = {
+            projets: 'Mes projets BTS SIO : 1️⃣ **PHP/MySQL** - App gestion complète\n2️⃣ **React/Node.js** - Plateforme moderne\nCode sur GitHub : senvi27',
+            competences: '⭐ **Frontend** : HTML/CSS 92% | JS 87%\n⭐ **Backend** : PHP 82% | MySQL 88%\n⭐ **DevOps** : Git 95% | Docker 78%',
+            cv: '📄 Cliquez **Télécharger CV** (en haut à droite) ou visitez https://senvi27.github.io/CV.pdf',
+            contact: '📧 giovannibintoul46@gmail.com\n💻 GitHub: senvi27\n📱 WhatsApp: +594694493899\n📸 @p1nk2s',
+            parcours: '🎓 **BTS SIO SLAM** 2024-2026\n🏫 Lycée Melkior-Garré (Cayenne)\n💼 Stage Collège Auguste Déde (2025)',
+            ia: '🤖 IA intégrée ! Demandez-moi du code PHP, React, SQL ou conseils BTS SIO !'
+        };
+        this.addMessage('user', this.quickButtons.find(b => b.intent === intent).text);
+        this.addMessage('bot', quickResponses[intent]);
+    }
+
+    async sendMessage() {
+        const message = this.chatbotInput.value.trim();
+        if (!message || this.isTyping) return;
+
+        this.addMessage('user', message);
+        this.chatbotInput.value = '';
+        this.isTyping = true;
+
+        // Quick responses pour portfolio
+        const quickResponse = this.getQuickResponse(message.toLowerCase());
+        if (quickResponse) {
+            setTimeout(() => {
+                this.addMessage('bot', quickResponse);
+                this.isTyping = false;
+            }, 800);
+            return;
+        }
+
+        // IA Avancée (OpenAI/Grok)
+        try {
+            const aiResponse = await this.getAIResponse(message);
+            this.addMessage('bot', `🤖 ${aiResponse}`);
+        } catch (error) {
+            this.addMessage('bot', '🚀 IA en maintenance. Essayez "projets", "cv", "compétences" ou "contact" !');
+        } finally {
+            this.isTyping = false;
+        }
+    }
+
+    getQuickResponse(message) {
+        const responses = {
+            'bonjour': 'Salut ! Bienvenue sur le portfolio de Giovanni BINTOUL (BTS SIO SLAM) 🚀',
+            'projet': '2 projets BTS : PHP/MySQL + React/Node.js. Code sur GitHub senvi27 !',
+            'compétence': 'HTML/CSS 92%, JS 87%, PHP 82%, MySQL 88%, Git 95% !',
+            'cv': '📄 Bouton en haut à droite ou https://senvi27.github.io/CV.pdf',
+            'contact': 'giovannibintoul46@gmail.com | senvi27 (GitHub)',
+            'bts': 'BTS SIO SLAM 2024-2026 • Lycée Melkior-Garré',
+            'stage': 'Stage Collège Auguste Déde (2025) + Securidom (2024)',
+            'php': 'Expert PHP 8/MySQL pour BTS SIO ! Demandez du code 🚀',
+            'react': 'React/Node.js pour projet 2ème année BTS !',
+            'code': 'Besoin de code ? Dites-moi PHP, SQL, JS ou React ! 💻'
+        };
+
+        for (let key in responses) {
+            if (message.includes(key)) return responses[key];
+        }
+        return null;
+    }
+
+    async getAIResponse(message) {
+        // Simulation IA avancée (remplace par vraie API)
+        const portfolioContext = `Portfolio BTS SIO SLAM de Giovanni BINTOUL. Compétences: PHP 82%, MySQL 88%, JS 87%. Projets: PHP/MySQL + React/Node.js. Contact: giovannibintoul46@gmail.com`;
+        
+        const prompts = {
+            code: `Génère du code ${message} pour BTS SIO (PHP/JS/SQL). Explique simplement.`,
+            conseil: `Conseil ${message} pour étudiant BTS SIO SLAM`,
+            projet: `Idée projet ${message} pour BTS SIO`
+        };
+
+        // IA contextuelle
+        if (message.includes('code') || message.includes('php') || message.includes('sql')) {
+            return `💻 **CODE BTS SIO**\n\`\`\`php\n// Exemple ${message}\n<?php echo "Bonjour BTS!"; ?>\n\`\`\`\nCopie-colle dans VSCode ! 🚀`;
+        }
+
+        return `Génial ! Pour "${message}" :\n\n${portfolioContext}\n\nBesoin de **code PHP/SQL** ou **conseils BTS** ? 💻`;
+    }
+
+    addMessage(sender, text, isHtml = true) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}-message`;
+        
+        if (isHtml) {
+            messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
+        } else {
+            messageDiv.innerHTML = `<div class="message-content">${text}</div>`;
+        }
+        
+        this.chatbotMessages.appendChild(messageDiv);
+        this.chatbotMessages.scrollTop = this.chatbotMessages.scrollHeight;
+    }
+}
+
+// ===== INITIALISATION =====
+const chatbot = new AdvancedChatbot();
+
+// ===== COOKIES =====
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.skill-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width;
+    });
+
+    // Cookies
+    const cookieBanner = document.getElementById('cookie-banner');
+    if (cookieBanner && !localStorage.getItem('cookiesAccepted')) {
+        setTimeout(() => cookieBanner.classList.add('active'), 2000);
+    }
+
+    document.getElementById('accept-cookies')?.addEventListener('click', () => {
+        document.getElementById('cookie-banner').classList.remove('active');
+        localStorage.setItem('cookiesAccepted', 'true');
+    });
+
+    document.getElementById('refuse-cookies')?.addEventListener('click', () => {
+        document.getElementById('cookie-banner').classList.remove('active');
     });
 });
